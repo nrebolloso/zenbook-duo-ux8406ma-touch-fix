@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Settings for your displays
+TOP_SCREEN="eDP-1"
+BOTTOM_SCREEN="eDP-2"
+RESOLUTION="2880x1800"
+RATE="120"
+
+# Touchscreen device names as reported by `xinput list`. Update if your unit differs.
+TOP_TOUCH="ELAN9008:00 04F3:425B"
+BOTTOM_TOUCH="ELAN9009:00 04F3:425A"
+
+# USB ID of the magnetic keyboard, used to detect attach/detach.
+KEYBOARD_USB_ID="0b05:1b2c"
+
+case "$1" in
+  watch-displays)
+    "$0" normal
+    while inotifywait -e attrib /dev/bus/usb/*/ ; do
+      "$0" normal
+    done
+    ;;
+
+  normal|bottom-up)
+    sleep 1
+    if lsusb | grep -q "$KEYBOARD_USB_ID"; then
+      "$0" top
+    else
+      "$0" both
+    fi
+    ;;
+
+  top)
+    xrandr --output "$TOP_SCREEN" --primary --mode "$RESOLUTION" --rate "$RATE"
+    xrandr --output "$BOTTOM_SCREEN" --off
+    sleep 0.3
+    xinput map-to-output "$TOP_TOUCH" "$TOP_SCREEN" 2>/dev/null
+    ;;
+
+  both)
+    xrandr --output "$TOP_SCREEN" --primary --mode "$RESOLUTION" --rate "$RATE"
+    xrandr --output "$BOTTOM_SCREEN" --mode "$RESOLUTION" --rate "$RATE" --below "$TOP_SCREEN"
+    sleep 0.3
+    xinput map-to-output "$TOP_TOUCH" "$TOP_SCREEN" 2>/dev/null
+    xinput map-to-output "$BOTTOM_TOUCH" "$BOTTOM_SCREEN" 2>/dev/null
+    ;;
+
+  *) echo "Usage: duo <top|both|watch-displays>"
+esac

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/local/bin/duo watch-displays
+X-GNOME-Autostart-enabled=true
+NoDisplay=false
+Hidden=false
+Name=Zenbook Duo Helper
+Comment=Manages dual-screen layout and touchscreen mapping on keyboard attach/detach.
+X-GNOME-Autostart-Delay=0
