@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Installer for zenbook-duo-touch-fix.
+# Installer for zenbook-duo-screen-fix.
 # Copies `duo` to /usr/local/bin and sets up an autostart entry for the current user.
 
 set -euo pipefail
