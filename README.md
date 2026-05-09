@@ -1,4 +1,4 @@
-# zenbook-duo-ux8406ma-touch-fix
+# zenbook-duo-ux8406ma-screen-fix
 
 Dual-screen and dual-touchscreen helper for the **ASUS Zenbook Duo (UX8406MA)** on **Linux Mint (Cinnamon, X11)**.
 
@@ -10,7 +10,7 @@ Dual-screen and dual-touchscreen helper for the **ASUS Zenbook Duo (UX8406MA)** 
 
 ```bash
 sudo apt install x11-xserver-utils xinput inotify-tools usbutils
-git clone https://github.com/nrebolloso/zenbook-duo-ux8406ma-touch-fix.git
+git clone https://github.com/nrebolloso/zenbook-duo-ux8406ma-screen-fix.git
 cd zenbook-duo-ux8406ma-touch-fix
 ./install.sh
 ```
